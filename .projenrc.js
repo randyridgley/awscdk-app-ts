@@ -19,7 +19,7 @@ const project = new cdk.JsiiProject({
   ],
 
   devDeps: [
-    'projen@0.61.41',
+    'projen@0.57.9',
   ],
 
   peerDeps: [
