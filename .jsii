@@ -3060,11 +3060,11 @@
       }
     }
   },
-  "description": "projen starter for @randyridgley/cdk projects.",
+  "description": "projen starter for @randyridgley cdk projects.",
   "docs": {
     "stability": "stable"
   },
-  "homepage": "https://github.com/randyridgley/cdk-app-ts/",
+  "homepage": "https://github.com/randyridgley/awscdk-app-ts/",
   "jsiiVersion": "1.67.0 (build 2c027f5)",
   "license": "Apache-2.0",
   "metadata": {
@@ -3075,28 +3075,28 @@
     },
     "tscRootDir": "src"
   },
-  "name": "@randyridgley/cdk-app-ts",
+  "name": "@randyridgley/awscdk-app-ts",
   "readme": {
     "markdown": "# replace this"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/randyridgley/cdk-app-ts/"
+    "url": "https://github.com/randyridgley/awscdk-app-ts/"
   },
   "schema": "jsii/0.10.0",
   "targets": {
     "js": {
-      "npm": "@randyridgley/cdk-app-ts"
+      "npm": "@randyridgley/awscdk-app-ts"
     }
   },
   "types": {
-    "@randyridgley/cdk-app-ts.ProjCDKTypescriptOptions": {
-      "assembly": "@randyridgley/cdk-app-ts",
+    "@randyridgley/awscdk-app-ts.ProjCDKTypescriptOptions": {
+      "assembly": "@randyridgley/awscdk-app-ts",
       "datatype": true,
       "docs": {
         "stability": "stable"
       },
-      "fqn": "@randyridgley/cdk-app-ts.ProjCDKTypescriptOptions",
+      "fqn": "@randyridgley/awscdk-app-ts.ProjCDKTypescriptOptions",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/index.ts",
@@ -3140,17 +3140,17 @@
       ],
       "symbolId": "src/index:ProjCDKTypescriptOptions"
     },
-    "@randyridgley/cdk-app-ts.ProjCDKTypescriptProject": {
-      "assembly": "@randyridgley/cdk-app-ts",
+    "@randyridgley/awscdk-app-ts.ProjCDKTypescriptProject": {
+      "assembly": "@randyridgley/awscdk-app-ts",
       "base": "projen.typescript.TypeScriptAppProject",
       "docs": {
         "custom": {
-          "pjid": "projdk-app-ts"
+          "pjid": "projcdk-app-ts"
         },
         "stability": "stable",
         "summary": "Create a Proj CDK Typescript project."
       },
-      "fqn": "@randyridgley/cdk-app-ts.ProjCDKTypescriptProject",
+      "fqn": "@randyridgley/awscdk-app-ts.ProjCDKTypescriptProject",
       "initializer": {
         "docs": {
           "stability": "stable"
@@ -3163,7 +3163,7 @@
           {
             "name": "options",
             "type": {
-              "fqn": "@randyridgley/cdk-app-ts.ProjCDKTypescriptOptions"
+              "fqn": "@randyridgley/awscdk-app-ts.ProjCDKTypescriptOptions"
             }
           }
         ]
@@ -3193,5 +3193,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "ljX2y2XH+Xs80xLLx5arvg+ktr4VTrIq2cWISHw93RE="
+  "fingerprint": "ap2/YOxMgnOioAFvzp+McuH4IhVRniaIIrWBnCenTrk="
 }
