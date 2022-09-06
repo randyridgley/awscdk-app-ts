@@ -1,4 +1,5 @@
 const { cdk } = require('projen');
+const { NpmAccess } = require('projen/lib/javascript');
 
 const project = new cdk.JsiiProject({
   defaultReleaseBranch: 'main',
@@ -8,6 +9,7 @@ const project = new cdk.JsiiProject({
   author: 'randy.ridgley@gmail.com',
   repositoryUrl: 'https://github.com/randyridgley/awscdk-app-ts/',
   npmDistTag: 'latest',
+  npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   majorVersion: 1,
   license: 'Apache-2.0',
