@@ -2,7 +2,7 @@
   "dependencies": [
     {
       "name": "@types/jest",
-      "version": "^27",
+      "version": "^27.5.0",
       "type": "build"
     },
     {
@@ -11,60 +11,43 @@
       "type": "build"
     },
     {
-      "name": "@typescript-eslint/eslint-plugin",
-      "version": "^5",
+      "name": "aws-cdk-lib",
+      "version": "2.40.0",
       "type": "build"
     },
     {
-      "name": "@typescript-eslint/parser",
-      "version": "^5",
+      "name": "cdk-monitoring-constructs",
+      "version": "1.22.3",
       "type": "build"
     },
     {
-      "name": "eslint-import-resolver-node",
+      "name": "cdk-nag",
+      "version": "2.18.2",
       "type": "build"
     },
     {
-      "name": "eslint-import-resolver-typescript",
+      "name": "constructs",
+      "version": "10.1.94",
       "type": "build"
     },
     {
-      "name": "eslint-plugin-import",
+      "name": "eslint-config-prettier",
+      "version": "^8.5.0",
       "type": "build"
     },
     {
       "name": "eslint",
-      "version": "^8",
-      "type": "build"
-    },
-    {
-      "name": "jest-junit",
-      "version": "^13",
+      "version": "^8.16.0",
       "type": "build"
     },
     {
       "name": "jest",
-      "version": "^27",
+      "version": "^27.5.1",
       "type": "build"
     },
     {
-      "name": "jsii",
-      "type": "build"
-    },
-    {
-      "name": "jsii-diff",
-      "type": "build"
-    },
-    {
-      "name": "jsii-docgen",
-      "type": "build"
-    },
-    {
-      "name": "jsii-pacmak",
-      "type": "build"
-    },
-    {
-      "name": "json-schema",
+      "name": "js-yaml",
+      "version": "4.1.0",
       "type": "build"
     },
     {
@@ -73,17 +56,22 @@
       "type": "build"
     },
     {
+      "name": "prettier",
+      "version": "^2.7.1",
+      "type": "build"
+    },
+    {
       "name": "projen",
       "type": "build"
     },
     {
-      "name": "standard-version",
-      "version": "^9",
+      "name": "ts-jest",
+      "version": "^27.1.4",
       "type": "build"
     },
     {
-      "name": "ts-jest",
-      "version": "^27",
+      "name": "ts-node",
+      "version": "^10.8.0",
       "type": "build"
     },
     {

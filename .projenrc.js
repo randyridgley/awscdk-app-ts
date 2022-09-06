@@ -1,14 +1,39 @@
 const { cdk } = require('projen');
-const project = new cdk.JsiiProject({
-  author: 'Randy Ridgley',
-  authorAddress: 'rridgley@amazon.com',
-  defaultReleaseBranch: 'main',
-  name: 'awscdk-ts-app',
-  repositoryUrl: 'https://github.com/rridgley/awscdk-ts-app.git',
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+const project = new cdk.JsiiProject({
+  defaultReleaseBranch: 'main',
+  name: '@randyridgley/cdk-app-ts',
+  packageName: '@randyridgley/cdk-app-ts',
+  description: 'projen starter for @randyridgley/cdk projects.',
+  author: 'randy.ridgley@gmail.com',
+  repositoryUrl: 'https://github.com/randyridgley/cdk-app-ts/',
+  npmDistTag: 'latest',
+
+  releaseToNpm: true,
+
+  deps: [
+    'aws-cdk-lib@2.40.0',
+    'constructs@10.1.94',
+  ],
+
+  devDeps: [
+    'projen@0.61.41',
+  ],
+
+  peerDeps: [
+    'projen',
+  ],
+
+  bundledDeps: [
+    'aws-cdk@2.40.0',
+  ],
 });
+
+project.tsconfigDev.addInclude('sample');
+
+
+// Ensure we ignore 'tmp' (which the integration test outputs).
+project.tasks.tryFind('release').prependExec('rm -rf tmp', { name: 'clean-test-dir' });
+project.addGitIgnore('tmp/');
+
 project.synth();

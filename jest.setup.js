@@ -1,0 +1,1 @@
+jest.mock("@randyridgley/cdk/lib/constants/tracking-tag");
