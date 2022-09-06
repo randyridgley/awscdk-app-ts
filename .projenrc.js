@@ -35,7 +35,7 @@ project.tsconfigDev.addInclude('sample');
 
 
 // Ensure we ignore 'tmp' (which the integration test outputs).
-project.tasks.tryFind('release').prependExec('rm -rf tmp', { name: 'clean-test-dir' });
+// project.tasks.tryFind('release').prependExec('rm -rf tmp', { name: 'clean-test-dir' });
 project.addGitIgnore('tmp/');
 project.addGitIgnore('test-reports/');
 project.synth();
