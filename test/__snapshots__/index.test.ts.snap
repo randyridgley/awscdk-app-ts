@@ -926,6 +926,10 @@ export class PipelineStack extends BaseStack {
     },
     "license": "Apache-2.0",
     "name": "test",
+    "resolutions": Object {
+      "@types/responselike": "1.0.0",
+      "got": "12.3.1",
+    },
     "scripts": Object {
       "default": "npx projen default",
       "dependencies": "npx projen dependencies",

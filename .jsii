@@ -11,7 +11,7 @@
   "dependencies": {
     "aws-cdk-lib": "2.40.0",
     "constructs": "10.1.94",
-    "projen": "^0.61.43"
+    "projen": "^0.61.44"
   },
   "dependencyClosure": {
     "aws-cdk-lib": {
@@ -3192,6 +3192,6 @@
       "symbolId": "src/index:ProjCDKTypescriptProject"
     }
   },
-  "version": "0.0.0",
-  "fingerprint": "ap2/YOxMgnOioAFvzp+McuH4IhVRniaIIrWBnCenTrk="
+  "version": "1.0.0",
+  "fingerprint": "oyPgzjyfJa4POHhXC5ew+yv+I3oCCTYvrkMYIBJl8Og="
 }
