@@ -1,9 +1,9 @@
 {
-  "name": "@randyridgley/cdk-app-ts",
-  "description": "projen starter for @randyridgley/cdk projects.",
+  "name": "@randyridgley/awscdk-app-ts",
+  "description": "projen starter for @randyridgley cdk projects.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/randyridgley/cdk-app-ts/"
+    "url": "https://github.com/randyridgley/awscdk-app-ts/"
   },
   "scripts": {
     "build": "npx projen build",
