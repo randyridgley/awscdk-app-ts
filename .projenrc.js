@@ -2,11 +2,11 @@ const { cdk } = require('projen');
 
 const project = new cdk.JsiiProject({
   defaultReleaseBranch: 'main',
-  name: '@randyridgley/cdk-app-ts',
-  packageName: '@randyridgley/cdk-app-ts',
-  description: 'projen starter for @randyridgley/cdk projects.',
+  name: '@randyridgley/awscdk-app-ts',
+  packageName: '@randyridgley/awscdk-app-ts',
+  description: 'projen starter for @randyridgley cdk projects.',
   author: 'randy.ridgley@gmail.com',
-  repositoryUrl: 'https://github.com/randyridgley/cdk-app-ts/',
+  repositoryUrl: 'https://github.com/randyridgley/awscdk-app-ts/',
   npmDistTag: 'latest',
   npmRegistryUrl: 'https://npm.pkg.github.com',
   releaseToNpm: true,

@@ -20,7 +20,7 @@ export interface ProjCDKTypescriptOptions {
 /**
  * Create a Proj CDK Typescript project.
  *
- * @pjid projdk-app-ts
+ * @pjid projcdk-app-ts
  */
 export class ProjCDKTypescriptProject extends TypeScriptAppProject {
   constructor(options: ProjCDKTypescriptOptions) {
@@ -53,7 +53,7 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         'cdk-monitoring-constructs@1.22.3',
         'js-yaml@4.1.0',
 
-        '@randyridgley/cdk-app-ts', // required for subsequent synths ('npx projen') to work!
+        '@randyridgley/awscdk-app-ts', // required for subsequent synths ('npx projen') to work!
       ],
 
       github: false,
