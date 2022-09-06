@@ -56,7 +56,7 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         '@randyridgley/awscdk-app-ts', // required for subsequent synths ('npx projen') to work!
       ],
 
-      github: false,
+      github: true,
       sampleCode: false,
       jest: true,
       prettier: true,
