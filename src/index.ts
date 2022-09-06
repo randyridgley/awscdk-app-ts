@@ -1,7 +1,7 @@
 // import * as child_process from 'child_process';
 import { readFileSync } from 'fs';
 import * as path from 'path';
-import { JsonFile, SampleDir, SampleFile } from 'projen';
+import { JsonFile, SampleDir } from 'projen';
 import { TypeScriptAppProject, TypeScriptProjectOptions } from 'projen/lib/typescript';
 
 export interface ProjCDKTypescriptOptions {
@@ -53,16 +53,18 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         'cdk-monitoring-constructs@1.22.3',
         'js-yaml@4.1.0',
 
-        // '@randyridgley/cdk-app-ts', // required for subsequent synths ('npx projen') to work!
+        '@randyridgley/cdk-app-ts', // required for subsequent synths ('npx projen') to work!
       ],
 
       github: false,
       sampleCode: false,
-      jest: false,
-      prettier: false,
-      eslint: false,
-
-      srcdir: 'lib', // this defaults to src unfortunately for us
+      jest: true,
+      prettier: true,
+      eslint: true,
+      eslintOptions: {
+        prettier: true,
+        dirs: ['src'],
+      },
 
       ...defaults,
       ...options,
@@ -74,20 +76,16 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
     this.removeTask('build');
     this.removeTask('clobber');
     this.removeTask('compile');
-    this.removeTask('eslint');
     this.removeTask('package');
     this.removeTask('post-compile');
     this.removeTask('post-upgrade');
     this.removeTask('pre-compile');
     this.removeTask('projen');
-    this.removeTask('test');
     this.removeTask('test-update');
     this.removeTask('upgrade');
 
     // Define our own tasks
     this.addTask('dependencies', { exec: this.package.installCommand, description: 'Install dependencies based on lockfile e.g. during CI' });
-    this.addTask('test', { exec: 'jest', description: 'Run tests' });
-    this.addTask('lint', { exec: 'eslint --ext .ts --no-error-on-unmatched-pattern lib/**', description: 'Lint sources using eslint' });
     this.addTask('synth', { exec: 'cdk synth --path-metadata false --version-reporting false', description: 'synth CDK stack(s)' });
     this.addTask('diff', { exec: 'cdk diff --path-metadata false --version-reporting false', description: 'diff CDK stack' });
 
@@ -131,12 +129,8 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
       },
     });
 
-    new SampleFile(this, 'jest.setup.js', {
-      contents: 'jest.mock("@randyridgley/cdk/lib/constants/tracking-tag");',
-    });
-
     new SampleDir(this, 'lib', {
-      sourceDir: path.join(__dirname, '..', 'sample/lib'),
+      sourceDir: path.join(__dirname, '..', 'sample'),
     });
   }
 

@@ -8,7 +8,7 @@ const project = new cdk.JsiiProject({
   author: 'randy.ridgley@gmail.com',
   repositoryUrl: 'https://github.com/randyridgley/cdk-app-ts/',
   npmDistTag: 'latest',
-
+  npmRegistryUrl: 'https://npm.pkg.github.com',
   releaseToNpm: true,
 
   deps: [

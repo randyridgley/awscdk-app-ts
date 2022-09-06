@@ -3182,7 +3182,7 @@
           },
           "locationInModule": {
             "filename": "src/index.ts",
-            "line": 143
+            "line": 137
           },
           "name": "postSynthesize",
           "overrides": "projen.Project"
@@ -3193,5 +3193,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "eHWxx4ElNuktqapLDhWY6Gf+w1sFPH6ddeitkTEHVRc="
+  "fingerprint": "ljX2y2XH+Xs80xLLx5arvg+ktr4VTrIq2cWISHw93RE="
 }
