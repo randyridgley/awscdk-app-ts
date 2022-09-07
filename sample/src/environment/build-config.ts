@@ -12,5 +12,5 @@ export interface BuildConfig {
 }
 
 export interface Parameters {
-    readonly TestParmeter?: string;
+    readonly TestParameter?: string;
 }

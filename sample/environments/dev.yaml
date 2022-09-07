@@ -1,24 +1,11 @@
-AWSAccountID: "649037252677"
+AWSAccountID: "XXXXXXXXXXXX"
 AWSProfileName: "default"
 AWSProfileRegion: "us-east-1"
 
-App: "ConnectedProductsPipeline-Cdk"
+App: "DevApplication"
 Environment: "dev"
 Version: "0.0.0"
 Build: "0"
 
 Parameters:
-  QuickSightUser: "AWSReservedSSO_AdministratorAccess_fcde9f6d59e33635/rridgley"
-  CrossAccountAwsID: "352786256175"
-  CrossAccountExternalID: "f45c7785-5d33-709b-5cdf-367d2a59f2d1"
-  AthenaQueries: 
-    - description: 'events full query'
-      name: 'EventsFullQuery'
-      path: 'queries/full.sql'
-    - description: 'events partial query'
-      name: 'EventsPartialQuery'
-      path: 'queries/partial.sql'
-  StreamName: 'dev-events-stream'
-  BaseTableName: 'dev_events'
-  DeliveryStreamName: 'dev-events-delivery-stream'
-  TimestampColumn: 'eventtimestamp'
+  TestParameter: "TestFooBar"

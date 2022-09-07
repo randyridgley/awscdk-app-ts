@@ -2,7 +2,7 @@ import path from 'path';
 import * as fs from 'fs'
 import { App, Aspects } from 'aws-cdk-lib';
 import { AwsSolutionsChecks } from 'cdk-nag';
-import { PipelineStack } from './stacks/pipeline-stack';
+import { DefaultStack } from './stacks/default-stack';
 import { BuildConfig } from './environment/build-config';
 const yaml = require('js-yaml');
 
@@ -33,7 +33,7 @@ function getConfig() {
         Build: ensureString(unparsedEnv, 'Build'),
 
         Parameters: {
-            TestParmeter: ensureString(unparsedEnv['Parameters'], 'TestParameter'),
+            TestParameter: ensureString(unparsedEnv['Parameters'], 'TestParameter'),
         }
     };
 
@@ -42,14 +42,14 @@ function getConfig() {
 
 let buildConfig: BuildConfig = getConfig();
 
-let pipelineStackName = buildConfig.App + "-" + buildConfig.Environment + "-pipeline";
-const pipelineStack = new PipelineStack(app, pipelineStackName, {
+let defaultStackName = buildConfig.App + "-" + buildConfig.Environment + "-default";
+const defaultStack = new DefaultStack(app, defaultStackName, {
   env: {
       region: buildConfig.AWSProfileRegion,
       account: buildConfig.AWSAccountID
   },
 }, buildConfig);
 
-Aspects.of(pipelineStack).add(new AwsSolutionsChecks({ verbose: true }));
+Aspects.of(defaultStack).add(new AwsSolutionsChecks({ verbose: true }));
 
 app.synth();
