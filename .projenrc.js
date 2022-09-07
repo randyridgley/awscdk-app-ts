@@ -8,7 +8,7 @@ const project = new cdk.JsiiProject({
   description: 'projen starter for @randyridgley cdk projects.',
   author: 'randy.ridgley@gmail.com',
   repositoryUrl: 'https://github.com/randyridgley/awscdk-app-ts/',
-
+  majorVersion: 1,
   npmDistTag: 'latest',
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,

@@ -52,3 +52,4 @@ tsconfig.json
 !/API.md
 tmp/
 test-reports/
+.DS_Store*
