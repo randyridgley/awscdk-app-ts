@@ -34,6 +34,12 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         contents: readme(),
       },
 
+      deps: [
+        'cdk-nag@2.18.2',
+        'cdk-monitoring-constructs@1.22.3',
+        '@randyridgley/cdk-constructs',
+      ],
+
       devDeps: [
         '@types/jest@^27.5.0',
         '@types/node@17.0.35',
