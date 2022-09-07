@@ -30,7 +30,7 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
     };
 
     const tsOpts: TypeScriptProjectOptions = {
-      defaultReleaseBranch: 'main',
+      defaultReleaseBranch: 'main',      
       readme: {
         filename: 'README.md',
         contents: readme(),
@@ -58,6 +58,7 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
 
       github: false,
       sampleCode: false,
+      
       jest: false,
       prettier: false,
       eslint: false,
@@ -67,7 +68,7 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
     };
 
     super(tsOpts);
-
+    
     // Remove existing tasks
     this.removeTask('build');
     this.removeTask('clobber');
