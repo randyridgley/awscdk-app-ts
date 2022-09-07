@@ -225,7 +225,7 @@ tsconfig.tsbuildinfo
         "name": "lint",
         "steps": Array [
           Object {
-            "exec": "eslint --ext .ts --no-error-on-unmatched-pattern lib/**",
+            "exec": "eslint --ext .ts --no-error-on-unmatched-pattern src/**",
           },
         ],
       },
@@ -520,7 +520,7 @@ tsconfig.tsbuildinfo
         "./jest.setup.js",
       ],
       "testMatch": Array [
-        "<rootDir>/lib/**/*.test.ts",
+        "<rootDir>/src/**/*.test.ts",
       ],
       "transform": Object {
         "^.+\\\\.tsx?$": "ts-jest",

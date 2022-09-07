@@ -86,13 +86,13 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
     // Define our own tasks
     this.addTask('dependencies', { exec: this.package.installCommand, description: 'Install dependencies based on lockfile e.g. during CI' });
     this.addTask('test', { exec: 'jest', description: 'Run tests' });
-    this.addTask('lint', { exec: 'eslint --ext .ts --no-error-on-unmatched-pattern lib/**', description: 'Lint sources using eslint' });
+    this.addTask('lint', { exec: 'eslint --ext .ts --no-error-on-unmatched-pattern src/**', description: 'Lint sources using eslint' });
     this.addTask('synth', { exec: 'cdk synth --path-metadata false --version-reporting false', description: 'synth CDK stack(s)' });
     this.addTask('diff', { exec: 'cdk diff --path-metadata false --version-reporting false', description: 'diff CDK stack' });
 
     this.addFields({
       jest: {
-        testMatch: ['<rootDir>/lib/**/*.test.ts'],
+        testMatch: ['<rootDir>/src/**/*.test.ts'],
         transform: {
           '^.+\\.tsx?$': 'ts-jest',
         },
