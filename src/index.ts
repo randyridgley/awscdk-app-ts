@@ -50,6 +50,7 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         'constructs@10.1.94',
         'cdk-monitoring-constructs@1.22.3',
         'js-yaml@4.1.0',
+        '@randyridgley/cdk-constructs',
 
         '@randyridgley/awscdk-app-ts', // required for subsequent synths ('npx projen') to work!
       ],

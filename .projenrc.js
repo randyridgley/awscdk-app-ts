@@ -1,6 +1,5 @@
 const { cdk, javascript } = require('projen');
 const { NpmAccess } = require('projen/lib/javascript');
-const { ReleaseTrigger } = require('projen/lib/release');
 
 const project = new cdk.JsiiProject({
   defaultReleaseBranch: 'main',
