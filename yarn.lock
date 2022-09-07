@@ -2569,9 +2569,9 @@ flatted@^3.1.0, flatted@^3.2.6:
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
 form-data-encoder@^2.0.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/form-data-encoder/-/form-data-encoder-2.1.1.tgz#1d8d916a3f64a5251a026396e201a7d0710e5980"
-  integrity sha512-idwynH1VO+o1kwbvaxoquexnQyOlX6stxLnECKEHowbFEEo1A02Gz9h7F7q9hxnKu9Z5g6t0vqE5yQaNj8p/UQ==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/form-data-encoder/-/form-data-encoder-2.1.2.tgz#5996b7c236e8c418d08316055a2235226c5e4061"
+  integrity sha512-FCaIOVTRA9E0siY6FeXid7D5yrCqpsErplUkE2a1BEiKj1BE9z6FbKB4ntDTwC4NVLie9p+4E9nX4mWwEOT05A==
 
 form-data@^3.0.0:
   version "3.0.1"
