@@ -63,7 +63,6 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
 
       github: false,
       sampleCode: false,
-
       jest: false,
       prettier: false,
       eslint: false,
