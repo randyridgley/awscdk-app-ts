@@ -13,7 +13,7 @@ const project = new cdk.JsiiProject({
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   majorVersion: 1,
-  
+
   deps: [
     'aws-cdk-lib@2.40.0',
     'constructs@10.1.94',
