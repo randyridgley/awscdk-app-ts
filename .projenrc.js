@@ -28,7 +28,12 @@ const project = new cdk.JsiiProject({
 
   peerDeps: ['projen'],
 
-  bundledDeps: ['aws-cdk@2.40.0'],
+  bundledDeps: [
+    'aws-cdk@2.40.0',
+    '@randyridgley/cdk-constructs',
+    'cdk-monitoring-constructs@1.22.3',
+    'cdk-nag@2.18.2',
+  ],
 });
 
 project.tsconfigDev.addInclude('sample');

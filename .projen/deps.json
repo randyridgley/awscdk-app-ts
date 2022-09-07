@@ -103,8 +103,22 @@
       "type": "build"
     },
     {
+      "name": "@randyridgley/cdk-constructs",
+      "type": "bundled"
+    },
+    {
       "name": "aws-cdk",
       "version": "2.40.0",
+      "type": "bundled"
+    },
+    {
+      "name": "cdk-monitoring-constructs",
+      "version": "1.22.3",
+      "type": "bundled"
+    },
+    {
+      "name": "cdk-nag",
+      "version": "2.18.2",
       "type": "bundled"
     },
     {

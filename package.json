@@ -63,12 +63,18 @@
     "projen": "^0.61.45"
   },
   "dependencies": {
+    "@randyridgley/cdk-constructs": "^0.0.0",
     "aws-cdk": "2.40.0",
     "aws-cdk-lib": "2.40.0",
+    "cdk-monitoring-constructs": "1.22.3",
+    "cdk-nag": "2.18.2",
     "constructs": "10.1.94"
   },
   "bundledDependencies": [
-    "aws-cdk"
+    "@randyridgley/cdk-constructs",
+    "aws-cdk",
+    "cdk-monitoring-constructs",
+    "cdk-nag"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
