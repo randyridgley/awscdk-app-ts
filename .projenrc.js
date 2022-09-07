@@ -1,5 +1,6 @@
 const { cdk, javascript } = require('projen');
 const { NpmAccess } = require('projen/lib/javascript');
+const { ReleaseTrigger } = require('projen/lib/release');
 
 const project = new cdk.JsiiProject({
   defaultReleaseBranch: 'main',
@@ -22,26 +23,16 @@ const project = new cdk.JsiiProject({
     },
   },
 
-  deps: [
-    'aws-cdk-lib@2.40.0',
-    'constructs@10.1.94',
-  ],
+  deps: ['aws-cdk-lib@2.40.0', 'constructs@10.1.94'],
 
-  devDeps: [
-    'projen@0.61.45',
-  ],
+  devDeps: ['projen@0.61.45'],
 
-  peerDeps: [
-    'projen',
-  ],
+  peerDeps: ['projen'],
 
-  bundledDeps: [
-    'aws-cdk@2.40.0',
-  ],
+  bundledDeps: ['aws-cdk@2.40.0'],
 });
 
 project.tsconfigDev.addInclude('sample');
-
 
 // Ensure we ignore 'tmp' (which the integration test outputs).
 // project.tasks.tryFind('release').prependExec('rm -rf tmp', { name: 'clean-test-dir' });

@@ -5,7 +5,6 @@ import { JsonFile, SampleDir } from 'projen';
 import { TypeScriptAppProject, TypeScriptProjectOptions } from 'projen/lib/typescript';
 
 export interface ProjCDKTypescriptOptions {
-
   /**
    * Package name
    */
@@ -24,7 +23,6 @@ export interface ProjCDKTypescriptOptions {
  */
 export class ProjCDKTypescriptProject extends TypeScriptAppProject {
   constructor(options: ProjCDKTypescriptOptions) {
-
     const defaults: ProjCDKTypescriptOptions = {
       name: 'TODO',
     };
@@ -85,11 +83,23 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
     // this.removeTask('watch');
 
     // Define our own tasks
-    this.addTask('dependencies', { exec: this.package.installCommand, description: 'Install dependencies based on lockfile e.g. during CI' });
+    this.addTask('dependencies', {
+      exec: this.package.installCommand,
+      description: 'Install dependencies based on lockfile e.g. during CI',
+    });
     this.addTask('test', { exec: 'jest', description: 'Run tests' });
-    this.addTask('lint', { exec: 'eslint --ext .ts --no-error-on-unmatched-pattern src/**', description: 'Lint sources using eslint' });
-    this.addTask('synth', { exec: 'cdk synth --path-metadata false --version-reporting false', description: 'synth CDK stack(s)' });
-    this.addTask('diff', { exec: 'cdk diff --path-metadata false --version-reporting false', description: 'diff CDK stack' });
+    this.addTask('lint', {
+      exec: 'eslint --ext .ts --no-error-on-unmatched-pattern src/**',
+      description: 'Lint sources using eslint',
+    });
+    this.addTask('synth', {
+      exec: 'cdk synth --path-metadata false --version-reporting false',
+      description: 'synth CDK stack(s)',
+    });
+    this.addTask('diff', {
+      exec: 'cdk diff --path-metadata false --version-reporting false',
+      description: 'diff CDK stack',
+    });
 
     this.addFields({
       jest: {
@@ -118,7 +128,6 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         },
         ignorePatterns: ['**/*.js', '**/*.d.ts', 'node_modules', 'cdk.out'],
       },
-
     });
 
     new JsonFile(this, 'cdk.json', {
