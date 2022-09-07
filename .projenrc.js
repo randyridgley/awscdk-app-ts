@@ -1,4 +1,4 @@
-const { cdk } = require('projen');
+const { cdk, javascript } = require('projen');
 const { NpmAccess } = require('projen/lib/javascript');
 
 const project = new cdk.JsiiProject({
@@ -13,6 +13,14 @@ const project = new cdk.JsiiProject({
   npmRegistryUrl: 'https://npm.pkg.github.com',
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
+  prettier: true,
+  prettierOptions: {
+    settings: {
+      printWidth: 120,
+      singleQuote: true,
+      trailingComma: javascript.TrailingComma.ALL,
+    },
+  },
 
   deps: [
     'aws-cdk-lib@2.40.0',
