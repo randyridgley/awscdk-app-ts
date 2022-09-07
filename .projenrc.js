@@ -10,7 +10,7 @@ const project = new cdk.JsiiProject({
   repositoryUrl: 'https://github.com/randyridgley/awscdk-app-ts/',
 
   npmDistTag: 'latest',
-  npmRegistryUrl: 'https://npm.pkg.github.com',
+  // npmRegistryUrl: 'https://npm.pkg.github.com',
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   prettier: true,
