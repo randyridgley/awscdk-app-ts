@@ -56,15 +56,11 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         '@randyridgley/awscdk-app-ts', // required for subsequent synths ('npx projen') to work!
       ],
 
-      github: true,
+      github: false,
       sampleCode: false,
-      jest: true,
-      prettier: true,
-      eslint: true,
-      eslintOptions: {
-        prettier: true,
-        dirs: ['src'],
-      },
+      jest: false,
+      prettier: false,
+      eslint: false,
 
       ...defaults,
       ...options,
@@ -76,16 +72,21 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
     this.removeTask('build');
     this.removeTask('clobber');
     this.removeTask('compile');
+    this.removeTask('eslint');
     this.removeTask('package');
     this.removeTask('post-compile');
     this.removeTask('post-upgrade');
     this.removeTask('pre-compile');
     this.removeTask('projen');
+    this.removeTask('test');
     this.removeTask('test-update');
     this.removeTask('upgrade');
+    // this.removeTask('watch');
 
     // Define our own tasks
     this.addTask('dependencies', { exec: this.package.installCommand, description: 'Install dependencies based on lockfile e.g. during CI' });
+    this.addTask('test', { exec: 'jest', description: 'Run tests' });
+    this.addTask('lint', { exec: 'eslint --ext .ts --no-error-on-unmatched-pattern lib/**', description: 'Lint sources using eslint' });
     this.addTask('synth', { exec: 'cdk synth --path-metadata false --version-reporting false', description: 'synth CDK stack(s)' });
     this.addTask('diff', { exec: 'cdk diff --path-metadata false --version-reporting false', description: 'diff CDK stack' });
 
@@ -121,15 +122,11 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
 
     new JsonFile(this, 'cdk.json', {
       obj: {
-        app: 'npx ts-node lib/main.ts',
-        context: {
-          'aws-cdk:enableDiffNoFail': 'true',
-          '@aws-cdk/core:stackRelativeExports': 'true',
-        },
+        app: 'npx ts-node src/main.ts',
       },
     });
 
-    new SampleDir(this, 'lib', {
+    new SampleDir(this, 'src', {
       sourceDir: path.join(__dirname, '..', 'sample'),
     });
   }

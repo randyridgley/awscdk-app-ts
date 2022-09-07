@@ -12,14 +12,13 @@ const project = new cdk.JsiiProject({
   npmAccess: NpmAccess.PUBLIC,
   releaseToNpm: true,
   majorVersion: 1,
-  license: 'Apache-2.0',
   deps: [
     'aws-cdk-lib@2.40.0',
     'constructs@10.1.94',
   ],
 
   devDeps: [
-    'projen@0.57.9',
+    'projen@0.61.44',
   ],
 
   peerDeps: [
