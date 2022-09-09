@@ -20,7 +20,6 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
 
       github: false,
       sampleCode: false,
-      cdkVersionPinning: true,
       requireApproval: ApprovalLevel.NEVER,
       mergify: false,
       projenrcTs: true,
@@ -33,7 +32,20 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
 
     this.addDeps('cdk-nag@2.18.2', 'cdk-monitoring-constructs@1.22.3', '@randyridgley/cdk-constructs', 'js-yaml@4.1.0');
 
-    this.addDevDeps('@types/js-yaml');
+    this.addDevDeps(
+      '@types/js-yaml',
+      '@types/jest@^27.5.0',
+      '@types/node@17.0.35',
+      'eslint@^8.16.0',
+      'jest@^27.5.1',
+      'prettier@^2.7.1',
+      'ts-jest@^27.1.4',
+      'ts-node@^10.8.0',
+      'typescript@~4.7.2',
+      'eslint-config-prettier@^8.5.0',
+      'aws-cdk-lib@2.40.0',
+      'constructs@10.1.94',
+    );
 
     new SampleDir(this, 'src', {
       sourceDir: path.join(__dirname, '..', 'sample/src'),
