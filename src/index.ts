@@ -32,6 +32,7 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
       cdkVersionPinning: true,
       requireApproval: ApprovalLevel.NEVER,
       mergify: false,
+      projenrcTs: true,
       ...options,
     });
 

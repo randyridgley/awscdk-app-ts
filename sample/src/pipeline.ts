@@ -4,7 +4,7 @@ import path from 'path';
 import * as fs from 'fs'
 import * as yaml from 'js-yaml';
 import { BuildConfig, ensureString } from './environment/build-config';
-import { CdkpipelinesDemoPipelineStack } from '../pipeline/cdkpipelines-demo-pipeline-stack';
+import { CdkpipelinesDemoPipelineStack } from './pipeline/cdkpipelines-demo-pipeline-stack';
 
 
 const app = new App();

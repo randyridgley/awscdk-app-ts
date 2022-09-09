@@ -12,16 +12,18 @@ Object {
     ],
     "ignorePatterns": Array [
       "*.js",
-      "!.projenrc.js",
+      "!.projenrc.ts",
       "*.d.ts",
       "node_modules/",
       "*.generated.ts",
       "coverage",
+      "!.projenrc.ts",
+      "!projenrc/**/*.ts",
     ],
     "overrides": Array [
       Object {
         "files": Array [
-          ".projenrc.js",
+          ".projenrc.ts",
         ],
         "rules": Object {
           "@typescript-eslint/no-require-imports": "off",
@@ -116,6 +118,9 @@ Object {
           "devDependencies": Array [
             "**/test/**",
             "**/build-tools/**",
+            "**/projenrc/**",
+            ".projenrc.ts",
+            "projenrc/**/*.ts",
           ],
           "optionalDependencies": false,
           "peerDependencies": true,
@@ -529,7 +534,7 @@ cdk.out/
         "name": "default",
         "steps": Array [
           Object {
-            "exec": "node .projenrc.js",
+            "exec": "ts-node --project tsconfig.dev.json .projenrc.ts",
           },
         ],
       },
@@ -577,7 +582,7 @@ cdk.out/
         "name": "eslint",
         "steps": Array [
           Object {
-            "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools .projenrc.js",
+            "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools projenrc .projenrc.ts",
           },
         ],
       },
@@ -1124,7 +1129,7 @@ import path from 'path';
 import * as fs from 'fs'
 import * as yaml from 'js-yaml';
 import { BuildConfig, ensureString } from './environment/build-config';
-import { CdkpipelinesDemoPipelineStack } from '../pipeline/cdkpipelines-demo-pipeline-stack';
+import { CdkpipelinesDemoPipelineStack } from './pipeline/cdkpipelines-demo-pipeline-stack';
 
 
 const app = new App();
@@ -1244,6 +1249,8 @@ export class DefaultStack extends BaseStack {
       ".projenrc.js",
       "src/**/*.ts",
       "test/**/*.ts",
+      ".projenrc.ts",
+      "projenrc/**/*.ts",
     ],
   },
   "tsconfig.json": Object {
