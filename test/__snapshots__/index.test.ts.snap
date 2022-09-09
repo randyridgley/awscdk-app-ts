@@ -2,8 +2,241 @@
 
 exports[`should match synth snapshot 1`] = `
 Object {
+  ".eslintrc.json": Object {
+    "env": Object {
+      "jest": true,
+      "node": true,
+    },
+    "extends": Array [
+      "plugin:import/typescript",
+    ],
+    "ignorePatterns": Array [
+      "*.js",
+      "!.projenrc.js",
+      "*.d.ts",
+      "node_modules/",
+      "*.generated.ts",
+      "coverage",
+    ],
+    "overrides": Array [
+      Object {
+        "files": Array [
+          ".projenrc.js",
+        ],
+        "rules": Object {
+          "@typescript-eslint/no-require-imports": "off",
+          "import/no-extraneous-dependencies": "off",
+        },
+      },
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": Object {
+      "ecmaVersion": 2018,
+      "project": "./tsconfig.dev.json",
+      "sourceType": "module",
+    },
+    "plugins": Array [
+      "@typescript-eslint",
+      "import",
+    ],
+    "root": true,
+    "rules": Object {
+      "@typescript-eslint/indent": Array [
+        "error",
+        2,
+      ],
+      "@typescript-eslint/member-delimiter-style": Array [
+        "error",
+      ],
+      "@typescript-eslint/member-ordering": Array [
+        "error",
+        Object {
+          "default": Array [
+            "public-static-field",
+            "public-static-method",
+            "protected-static-field",
+            "protected-static-method",
+            "private-static-field",
+            "private-static-method",
+            "field",
+            "constructor",
+            "method",
+          ],
+        },
+      ],
+      "@typescript-eslint/no-floating-promises": Array [
+        "error",
+      ],
+      "@typescript-eslint/no-require-imports": Array [
+        "error",
+      ],
+      "@typescript-eslint/no-shadow": Array [
+        "error",
+      ],
+      "@typescript-eslint/return-await": Array [
+        "error",
+      ],
+      "array-bracket-newline": Array [
+        "error",
+        "consistent",
+      ],
+      "array-bracket-spacing": Array [
+        "error",
+        "never",
+      ],
+      "brace-style": Array [
+        "error",
+        "1tbs",
+        Object {
+          "allowSingleLine": true,
+        },
+      ],
+      "comma-dangle": Array [
+        "error",
+        "always-multiline",
+      ],
+      "comma-spacing": Array [
+        "error",
+        Object {
+          "after": true,
+          "before": false,
+        },
+      ],
+      "curly": Array [
+        "error",
+        "multi-line",
+        "consistent",
+      ],
+      "dot-notation": Array [
+        "error",
+      ],
+      "import/no-extraneous-dependencies": Array [
+        "error",
+        Object {
+          "devDependencies": Array [
+            "**/test/**",
+            "**/build-tools/**",
+          ],
+          "optionalDependencies": false,
+          "peerDependencies": true,
+        },
+      ],
+      "import/no-unresolved": Array [
+        "error",
+      ],
+      "import/order": Array [
+        "warn",
+        Object {
+          "alphabetize": Object {
+            "caseInsensitive": true,
+            "order": "asc",
+          },
+          "groups": Array [
+            "builtin",
+            "external",
+          ],
+        },
+      ],
+      "indent": Array [
+        "off",
+      ],
+      "key-spacing": Array [
+        "error",
+      ],
+      "keyword-spacing": Array [
+        "error",
+      ],
+      "max-len": Array [
+        "error",
+        Object {
+          "code": 150,
+          "ignoreComments": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true,
+          "ignoreUrls": true,
+        },
+      ],
+      "no-bitwise": Array [
+        "error",
+      ],
+      "no-duplicate-imports": Array [
+        "error",
+      ],
+      "no-multi-spaces": Array [
+        "error",
+        Object {
+          "ignoreEOLComments": false,
+        },
+      ],
+      "no-multiple-empty-lines": Array [
+        "error",
+      ],
+      "no-return-await": Array [
+        "off",
+      ],
+      "no-shadow": Array [
+        "off",
+      ],
+      "no-trailing-spaces": Array [
+        "error",
+      ],
+      "object-curly-newline": Array [
+        "error",
+        Object {
+          "consistent": true,
+          "multiline": true,
+        },
+      ],
+      "object-curly-spacing": Array [
+        "error",
+        "always",
+      ],
+      "object-property-newline": Array [
+        "error",
+        Object {
+          "allowAllPropertiesOnSameLine": true,
+        },
+      ],
+      "quote-props": Array [
+        "error",
+        "consistent-as-needed",
+      ],
+      "quotes": Array [
+        "error",
+        "single",
+        Object {
+          "avoidEscape": true,
+        },
+      ],
+      "semi": Array [
+        "error",
+        "always",
+      ],
+      "space-before-blocks": Array [
+        "error",
+      ],
+    },
+    "settings": Object {
+      "import/parsers": Object {
+        "@typescript-eslint/parser": Array [
+          ".ts",
+          ".tsx",
+        ],
+      },
+      "import/resolver": Object {
+        "node": Object {},
+        "typescript": Object {
+          "alwaysTryTypes": true,
+          "project": "./tsconfig.dev.json",
+        },
+      },
+    },
+  },
   ".gitattributes": "# ~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".
 
+*.snap linguist-generated
+/.eslintrc.json linguist-generated
 /.gitattributes linguist-generated
 /.gitignore linguist-generated
 /.npmignore linguist-generated
@@ -49,16 +282,27 @@ jspm_packages/
 .yarn-integrity
 .cache
 !/.projenrc.js
+/test-reports/
+junit.xml
+/coverage/
 !/test/
 !/tsconfig.json
 !/tsconfig.dev.json
 !/src/
 /lib
 /dist/
+!/.eslintrc.json
+/assets/
 !/cdk.json
+/cdk.out/
+.cdk.staging/
+.parcel-cache/
 ",
   ".npmignore": "# ~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".
 /.projen/
+/test-reports/
+junit.xml
+/coverage/
 /test/
 /tsconfig.dev.json
 /src/
@@ -72,14 +316,14 @@ dist
 /.idea/
 /.projenrc.js
 tsconfig.tsbuildinfo
+/.eslintrc.json
+!/assets/
+cdk.out/
+.cdk.staging/
 ",
   ".projen/deps.json": Object {
     "//": "~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".",
     "dependencies": Array [
-      Object {
-        "name": "@randyridgley/awscdk-app-ts",
-        "type": "build",
-      },
       Object {
         "name": "@randyridgley/cdk-constructs",
         "type": "build",
@@ -87,7 +331,6 @@ tsconfig.tsbuildinfo
       Object {
         "name": "@types/jest",
         "type": "build",
-        "version": "^27.5.0",
       },
       Object {
         "name": "@types/node",
@@ -95,9 +338,24 @@ tsconfig.tsbuildinfo
         "version": "^14",
       },
       Object {
+        "name": "@typescript-eslint/eslint-plugin",
+        "type": "build",
+        "version": "^5",
+      },
+      Object {
+        "name": "@typescript-eslint/parser",
+        "type": "build",
+        "version": "^5",
+      },
+      Object {
         "name": "aws-cdk-lib",
         "type": "build",
         "version": "2.40.0",
+      },
+      Object {
+        "name": "aws-cdk",
+        "type": "build",
+        "version": "2.1.0",
       },
       Object {
         "name": "cdk-monitoring-constructs",
@@ -115,24 +373,48 @@ tsconfig.tsbuildinfo
         "version": "10.1.94",
       },
       Object {
+        "name": "esbuild",
+        "type": "build",
+      },
+      Object {
         "name": "eslint-config-prettier",
         "type": "build",
         "version": "^8.5.0",
       },
       Object {
+        "name": "eslint-import-resolver-node",
+        "type": "build",
+      },
+      Object {
+        "name": "eslint-import-resolver-typescript",
+        "type": "build",
+      },
+      Object {
+        "name": "eslint-plugin-import",
+        "type": "build",
+      },
+      Object {
         "name": "eslint",
         "type": "build",
-        "version": "^8.16.0",
+        "version": "^8",
       },
       Object {
         "name": "jest",
         "type": "build",
-        "version": "^27.5.1",
+      },
+      Object {
+        "name": "jest-junit",
+        "type": "build",
+        "version": "^13",
       },
       Object {
         "name": "js-yaml",
         "type": "build",
         "version": "4.1.0",
+      },
+      Object {
+        "name": "json-schema",
+        "type": "build",
       },
       Object {
         "name": "npm-check-updates",
@@ -151,12 +433,10 @@ tsconfig.tsbuildinfo
       Object {
         "name": "ts-jest",
         "type": "build",
-        "version": "^27.1.4",
       },
       Object {
         "name": "ts-node",
         "type": "build",
-        "version": "^10.8.0",
       },
       Object {
         "name": "typescript",
@@ -165,6 +445,11 @@ tsconfig.tsbuildinfo
       Object {
         "name": "@randyridgley/cdk-constructs",
         "type": "runtime",
+      },
+      Object {
+        "name": "aws-cdk-lib",
+        "type": "runtime",
+        "version": "2.1.0",
       },
       Object {
         "name": "cdk-monitoring-constructs",
@@ -176,11 +461,17 @@ tsconfig.tsbuildinfo
         "type": "runtime",
         "version": "2.18.2",
       },
+      Object {
+        "name": "constructs",
+        "type": "runtime",
+        "version": "^10.0.5",
+      },
     ],
   },
   ".projen/files.json": Object {
     "//": "~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".",
     "files": Array [
+      ".eslintrc.json",
       ".gitattributes",
       ".gitignore",
       ".npmignore",
@@ -199,6 +490,70 @@ tsconfig.tsbuildinfo
       "PATH": "$(npx -c \\"node -e \\\\\\"console.log(process.env.PATH)\\\\\\"\\")",
     },
     "tasks": Object {
+      "build": Object {
+        "description": "Full release build",
+        "name": "build",
+        "steps": Array [
+          Object {
+            "spawn": "default",
+          },
+          Object {
+            "spawn": "pre-compile",
+          },
+          Object {
+            "spawn": "compile",
+          },
+          Object {
+            "spawn": "post-compile",
+          },
+          Object {
+            "spawn": "test",
+          },
+          Object {
+            "spawn": "package",
+          },
+        ],
+      },
+      "bundle": Object {
+        "description": "Prepare assets",
+        "name": "bundle",
+      },
+      "clobber": Object {
+        "condition": "git diff --exit-code > /dev/null",
+        "description": "hard resets to HEAD of origin and cleans the local repo",
+        "env": Object {
+          "BRANCH": "$(git branch --show-current)",
+        },
+        "name": "clobber",
+        "steps": Array [
+          Object {
+            "exec": "git checkout -b scratch",
+            "name": "save current HEAD in \\"scratch\\" branch",
+          },
+          Object {
+            "exec": "git checkout $BRANCH",
+          },
+          Object {
+            "exec": "git fetch origin",
+            "name": "fetch latest changes from origin",
+          },
+          Object {
+            "exec": "git reset --hard origin/$BRANCH",
+            "name": "hard reset to origin commit",
+          },
+          Object {
+            "exec": "git clean -fdx",
+            "name": "clean all untracked files",
+          },
+          Object {
+            "say": "ready to rock! (unpushed commits are under the \\"scratch\\" branch)",
+          },
+        ],
+      },
+      "compile": Object {
+        "description": "Only compile",
+        "name": "compile",
+      },
       "default": Object {
         "description": "Synthesize project files",
         "name": "default",
@@ -208,21 +563,30 @@ tsconfig.tsbuildinfo
           },
         ],
       },
-      "dependencies": Object {
-        "description": "Install dependencies based on lockfile e.g. during CI",
-        "name": "dependencies",
+      "deploy": Object {
+        "description": "Deploys your CDK app to the AWS cloud",
+        "name": "deploy",
         "steps": Array [
           Object {
-            "exec": "yarn install --check-files --frozen-lockfile",
+            "exec": "cdk deploy",
+          },
+        ],
+      },
+      "destroy": Object {
+        "description": "Destroys your cdk app in the AWS cloud",
+        "name": "destroy",
+        "steps": Array [
+          Object {
+            "exec": "cdk destroy",
           },
         ],
       },
       "diff": Object {
-        "description": "diff CDK stack",
+        "description": "Diffs the currently deployed app against your code",
         "name": "diff",
         "steps": Array [
           Object {
-            "exec": "cdk diff --path-metadata false --version-reporting false",
+            "exec": "cdk diff",
           },
         ],
       },
@@ -238,21 +602,51 @@ tsconfig.tsbuildinfo
           },
         ],
       },
-      "lint": Object {
-        "description": "Lint sources using eslint",
-        "name": "lint",
+      "eslint": Object {
+        "description": "Runs eslint against the codebase",
+        "name": "eslint",
         "steps": Array [
           Object {
-            "exec": "eslint --ext .ts --no-error-on-unmatched-pattern src/**",
+            "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools .projenrc.js",
           },
         ],
       },
+      "package": Object {
+        "description": "Creates the distribution package",
+        "name": "package",
+      },
+      "post-compile": Object {
+        "description": "Runs after successful compilation",
+        "name": "post-compile",
+        "steps": Array [
+          Object {
+            "spawn": "synth:silent",
+          },
+        ],
+      },
+      "post-upgrade": Object {
+        "description": "Runs after upgrading dependencies",
+        "name": "post-upgrade",
+      },
+      "pre-compile": Object {
+        "description": "Prepare the project for compilation",
+        "name": "pre-compile",
+      },
       "synth": Object {
-        "description": "synth CDK stack(s)",
+        "description": "Synthesizes your cdk app into cdk.out",
         "name": "synth",
         "steps": Array [
           Object {
-            "exec": "cdk synth --path-metadata false --version-reporting false",
+            "exec": "cdk synth",
+          },
+        ],
+      },
+      "synth:silent": Object {
+        "description": "Synthesizes your cdk app into cdk.out and suppresses the template in stdout (part of \\"yarn build\\")",
+        "name": "synth:silent",
+        "steps": Array [
+          Object {
+            "exec": "cdk synth -q",
           },
         ],
       },
@@ -261,16 +655,40 @@ tsconfig.tsbuildinfo
         "name": "test",
         "steps": Array [
           Object {
-            "exec": "jest",
+            "exec": "jest --passWithNoTests --all --updateSnapshot",
+          },
+          Object {
+            "spawn": "eslint",
+          },
+        ],
+      },
+      "test:update": Object {
+        "description": "Update jest snapshots",
+        "name": "test:update",
+        "steps": Array [
+          Object {
+            "exec": "jest --updateSnapshot",
+          },
+        ],
+      },
+      "test:watch": Object {
+        "description": "Run jest in watch mode",
+        "name": "test:watch",
+        "steps": Array [
+          Object {
+            "exec": "jest --watch",
           },
         ],
       },
       "watch": Object {
-        "description": "Watch & compile in the background",
+        "description": "Watches changes in your source code and rebuilds and deploys to the current account",
         "name": "watch",
         "steps": Array [
           Object {
-            "exec": "tsc --build -w",
+            "exec": "cdk deploy --hotswap",
+          },
+          Object {
+            "exec": "cdk watch",
           },
         ],
       },
@@ -511,7 +929,26 @@ If you are new to CDK the following resources are helpful:
 * https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html",
   "cdk.json": Object {
     "//": "~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".",
-    "app": "npx ts-node src/main.ts",
+    "app": "npx ts-node -P tsconfig.json --prefer-ts-exts src/main.ts",
+    "build": "npx projen bundle",
+    "output": "cdk.out",
+    "requireApproval": "never",
+    "watch": Object {
+      "exclude": Array [
+        "README.md",
+        "cdk*.json",
+        "**/*.d.ts",
+        "**/*.js",
+        "tsconfig.json",
+        "package*.json",
+        "yarn.lock",
+        "node_modules",
+      ],
+      "include": Array [
+        "src/**/*.ts",
+        "test/**/*.ts",
+      ],
+    },
   },
   "environments/dev.yaml": "AWSAccountID: \\"XXXXXXXXXXXX\\"
 AWSProfileName: \\"default\\"
@@ -541,67 +978,78 @@ Parameters:
     "//": "~~ Generated by projen. To modify, edit .projenrc.js and run \\"npx projen\\".",
     "dependencies": Object {
       "@randyridgley/cdk-constructs": "*",
+      "aws-cdk-lib": "2.1.0",
       "cdk-monitoring-constructs": "1.22.3",
       "cdk-nag": "2.18.2",
+      "constructs": "^10.0.5",
     },
     "devDependencies": Object {
-      "@randyridgley/awscdk-app-ts": "*",
       "@randyridgley/cdk-constructs": "*",
-      "@types/jest": "^27.5.0",
+      "@types/jest": "*",
       "@types/node": "^14",
+      "@typescript-eslint/eslint-plugin": "^5",
+      "@typescript-eslint/parser": "^5",
+      "aws-cdk": "2.1.0",
       "aws-cdk-lib": "2.40.0",
       "cdk-monitoring-constructs": "1.22.3",
       "cdk-nag": "2.18.2",
       "constructs": "10.1.94",
-      "eslint": "^8.16.0",
+      "esbuild": "*",
+      "eslint": "^8",
       "eslint-config-prettier": "^8.5.0",
-      "jest": "^27.5.1",
+      "eslint-import-resolver-node": "*",
+      "eslint-import-resolver-typescript": "*",
+      "eslint-plugin-import": "*",
+      "jest": "*",
+      "jest-junit": "^13",
       "js-yaml": "4.1.0",
+      "json-schema": "*",
       "npm-check-updates": "^15",
       "prettier": "^2.7.1",
       "projen": "*",
-      "ts-jest": "^27.1.4",
-      "ts-node": "^10.8.0",
+      "ts-jest": "*",
+      "ts-node": "*",
       "typescript": "*",
     },
-    "eslintConfig": Object {
-      "env": Object {
-        "jest": true,
-        "node": true,
-      },
-      "extends": Array [
-        "eslint-config-typescript",
-        "prettier",
-      ],
-      "ignorePatterns": Array [
-        "**/*.js",
-        "**/*.d.ts",
-        "node_modules",
-        "cdk.out",
-      ],
-      "parserOptions": Object {
-        "ecmaVersion": 2020,
-        "sourceType": "module",
-      },
-      "plugins": Array [
-        "@typescript-eslint",
-      ],
-      "root": true,
-      "rules": Object {
-        "@typescript-eslint/no-inferrable-types": 0,
-        "import/no-namespace": 2,
-      },
-    },
     "jest": Object {
-      "setupFilesAfterEnv": Array [
-        "./jest.setup.js",
+      "clearMocks": true,
+      "collectCoverage": true,
+      "coverageDirectory": "coverage",
+      "coveragePathIgnorePatterns": Array [
+        "/node_modules/",
+      ],
+      "coverageReporters": Array [
+        "json",
+        "lcov",
+        "clover",
+        "cobertura",
+        "text",
+      ],
+      "globals": Object {
+        "ts-jest": Object {
+          "tsconfig": "tsconfig.dev.json",
+        },
+      },
+      "preset": "ts-jest",
+      "reporters": Array [
+        "default",
+        Array [
+          "jest-junit",
+          Object {
+            "outputDirectory": "test-reports",
+          },
+        ],
       ],
       "testMatch": Array [
-        "<rootDir>/src/**/*.test.ts",
+        "<rootDir>/src/**/__tests__/**/*.ts?(x)",
+        "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)",
       ],
-      "transform": Object {
-        "^.+\\\\.tsx?$": "ts-jest",
-      },
+      "testPathIgnorePatterns": Array [
+        "/node_modules/",
+      ],
+      "watchPathIgnorePatterns": Array [
+        "/node_modules/",
+      ],
     },
     "license": "Apache-2.0",
     "name": "test",
@@ -610,14 +1058,26 @@ Parameters:
       "got": "12.3.1",
     },
     "scripts": Object {
+      "build": "npx projen build",
+      "bundle": "npx projen bundle",
+      "clobber": "npx projen clobber",
+      "compile": "npx projen compile",
       "default": "npx projen default",
-      "dependencies": "npx projen dependencies",
+      "deploy": "npx projen deploy",
+      "destroy": "npx projen destroy",
       "diff": "npx projen diff",
       "eject": "npx projen eject",
-      "lint": "npx projen lint",
+      "eslint": "npx projen eslint",
+      "package": "npx projen package",
+      "post-compile": "npx projen post-compile",
+      "post-upgrade": "npx projen post-upgrade",
+      "pre-compile": "npx projen pre-compile",
       "projen": "npx projen",
       "synth": "npx projen synth",
+      "synth:silent": "npx projen synth:silent",
       "test": "npx projen test",
+      "test:update": "npx projen test:update",
+      "test:watch": "npx projen test:watch",
       "watch": "npx projen watch",
     },
     "version": "0.0.0",
@@ -811,7 +1271,9 @@ export class DefaultStack extends BaseStack {
       "stripInternal": true,
       "target": "ES2019",
     },
-    "exclude": Array [],
+    "exclude": Array [
+      "cdk.out",
+    ],
     "include": Array [
       "src/**/*.ts",
     ],

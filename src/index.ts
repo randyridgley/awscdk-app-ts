@@ -1,19 +1,17 @@
 // import * as child_process from 'child_process';
 import { readFileSync } from 'fs';
 import * as path from 'path';
-import { JsonFile, SampleDir } from 'projen';
-import { TypeScriptAppProject, TypeScriptProjectOptions } from 'projen/lib/typescript';
+import { SampleDir } from 'projen';
+import { ApprovalLevel, AwsCdkTypeScriptApp, AwsCdkTypeScriptAppOptions } from 'projen/lib/awscdk';
+import { CdkPipelineAspect } from './aspects/cdk-pipelines';
 
-export interface ProjCDKTypescriptOptions {
+export interface ProjCdkAppOptions extends AwsCdkTypeScriptAppOptions {
   /**
-   * Package name
+   * Enable CDK pipelines
+   *
+   * @default false
    */
-  readonly name: string;
-
-  /**
-   * Target for synth.
-   */
-  readonly outdir?: string;
+  readonly cdkPipelines?: boolean;
 }
 
 /**
@@ -21,14 +19,9 @@ export interface ProjCDKTypescriptOptions {
  *
  * @pjid projcdk-app-ts
  */
-export class ProjCDKTypescriptProject extends TypeScriptAppProject {
-  constructor(options: ProjCDKTypescriptOptions) {
-    const defaults: ProjCDKTypescriptOptions = {
-      name: 'TODO',
-    };
-
-    const tsOpts: TypeScriptProjectOptions = {
-      defaultReleaseBranch: 'main',
+export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
+  constructor(options: ProjCdkAppOptions) {
+    super({
       readme: {
         filename: 'README.md',
         contents: readme(),
@@ -54,88 +47,28 @@ export class ProjCDKTypescriptProject extends TypeScriptAppProject {
         'js-yaml@4.1.0',
         '@randyridgley/cdk-constructs',
 
-        '@randyridgley/awscdk-app-ts', // required for subsequent synths ('npx projen') to work!
+        // '@randyridgley/awscdk-app-ts', // required for subsequent synths ('npx projen') to work!
       ],
       github: false,
       sampleCode: false,
-      jest: false,
-      prettier: false,
-      eslint: false,
-
-      ...defaults,
+      cdkVersionPinning: true,
+      requireApproval: ApprovalLevel.NEVER,
+      mergify: false,
+      tsconfig: {
+        compilerOptions: {
+          esModuleInterop: true,
+        },
+      },
       ...options,
-    };
+    });
 
-    super(tsOpts);
+    if (options.cdkPipelines) {
+      new CdkPipelineAspect(this);
+    }
 
     // Remove existing tasks
-    this.removeTask('build');
-    this.removeTask('clobber');
-    this.removeTask('compile');
-    this.removeTask('eslint');
-    this.removeTask('package');
-    this.removeTask('post-compile');
-    this.removeTask('post-upgrade');
-    this.removeTask('pre-compile');
-    this.removeTask('projen');
-    this.removeTask('test');
     this.removeTask('test-update');
     this.removeTask('upgrade');
-    // this.removeTask('watch');
-
-    // Define our own tasks
-    this.addTask('dependencies', {
-      exec: this.package.installCommand,
-      description: 'Install dependencies based on lockfile e.g. during CI',
-    });
-    this.addTask('test', { exec: 'jest', description: 'Run tests' });
-    this.addTask('lint', {
-      exec: 'eslint --ext .ts --no-error-on-unmatched-pattern src/**',
-      description: 'Lint sources using eslint',
-    });
-    this.addTask('synth', {
-      exec: 'cdk synth --path-metadata false --version-reporting false',
-      description: 'synth CDK stack(s)',
-    });
-    this.addTask('diff', {
-      exec: 'cdk diff --path-metadata false --version-reporting false',
-      description: 'diff CDK stack',
-    });
-
-    this.addFields({
-      jest: {
-        testMatch: ['<rootDir>/src/**/*.test.ts'],
-        transform: {
-          '^.+\\.tsx?$': 'ts-jest',
-        },
-        setupFilesAfterEnv: ['./jest.setup.js'],
-      },
-
-      eslintConfig: {
-        root: true,
-        env: {
-          node: true,
-          jest: true,
-        },
-        extends: ['eslint-config-typescript', 'prettier'],
-        parserOptions: {
-          ecmaVersion: 2020,
-          sourceType: 'module',
-        },
-        plugins: ['@typescript-eslint'],
-        rules: {
-          '@typescript-eslint/no-inferrable-types': 0,
-          'import/no-namespace': 2,
-        },
-        ignorePatterns: ['**/*.js', '**/*.d.ts', 'node_modules', 'cdk.out'],
-      },
-    });
-
-    new JsonFile(this, 'cdk.json', {
-      obj: {
-        app: 'npx ts-node src/main.ts',
-      },
-    });
 
     new SampleDir(this, 'src', {
       sourceDir: path.join(__dirname, '..', 'sample/src'),

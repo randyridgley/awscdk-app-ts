@@ -7,8 +7,8 @@ const project = new cdk.JsiiProject({
   packageName: '@randyridgley/awscdk-app-ts',
   description: 'projen starter for @randyridgley cdk projects.',
   author: 'randy.ridgley@gmail.com',
-  repositoryUrl: 'https://github.com/randyridgley/awscdk-app-ts/',
-
+  repositoryUrl: 'https://github.com/randyridgley/awscdk-app-ts.git',
+  defaultReleaseBranch: 'main',
   npmDistTag: 'latest',
   // npmRegistryUrl: 'https://npm.pkg.github.com',
   npmAccess: NpmAccess.PUBLIC,
@@ -25,8 +25,7 @@ const project = new cdk.JsiiProject({
   deps: ['aws-cdk-lib@2.40.0', 'constructs@10.1.94'],
 
   devDeps: ['projen@0.61.45'],
-
-  peerDeps: ['projen'],
+  peerDeps: ['projen@0.61.45'],
 
   bundledDeps: ['aws-cdk@2.40.0', '@randyridgley/cdk-constructs', 'cdk-monitoring-constructs@1.22.3', 'cdk-nag@2.18.2'],
 });
