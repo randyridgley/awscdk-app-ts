@@ -40,7 +40,7 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
     });
 
     new SampleDir(this, 'environments', {
-      sourceDir: path.join(__dirname, '..', 'sample/environments/pipeline'),
+      sourceDir: path.join(__dirname, '..', 'sample/environments'),
     });
   }
 
