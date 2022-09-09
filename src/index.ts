@@ -32,11 +32,6 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
       cdkVersionPinning: true,
       requireApproval: ApprovalLevel.NEVER,
       mergify: false,
-      tsconfig: {
-        compilerOptions: {
-          esModuleInterop: true,
-        },
-      },
       ...options,
     });
 
@@ -59,6 +54,12 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
     new SampleDir(this, 'environments', {
       sourceDir: path.join(__dirname, '..', 'sample/environments'),
     });
+
+    if (options.cdkPipelines) {
+      new SampleDir(this, 'src/pipeline', {
+        sourceDir: path.join(__dirname, '..', 'sample/pipeline'),
+      });
+    }
   }
 
   postSynthesize(): void {
