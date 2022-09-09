@@ -2,7 +2,7 @@
 import { Aspects, CfnOutput, Stage, StageProps } from 'aws-cdk-lib';
 import { AwsSolutionsChecks } from 'cdk-nag';
 import { Construct } from 'constructs';
-import { BuildConfig, getConfig } from '../src/environment/build-config';
+import { BuildConfig, getConfig } from '../environment/build-config';
 import { DefaultStack } from '../stacks/default-stack';
 
 /**
@@ -26,9 +26,5 @@ export class CdkpipelinesDemoStage extends Stage {
     }, buildConfig);
     
     Aspects.of(defaultStack).add(new AwsSolutionsChecks({ verbose: true }));
-    
-    
-    // Expose CdkpipelinesDemoStack's output one level higher
-    this.urlOutput = this.service.urlOutput;
   }
 }

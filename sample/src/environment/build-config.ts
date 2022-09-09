@@ -13,6 +13,10 @@ export interface BuildConfig {
     readonly Version : string;
     readonly Build : string;
 
+    readonly GithubSecretName: string;
+    readonly GithubRepo: string;
+    readonly GithubBranch: string;
+
     readonly Parameters: Parameters;
 }
 
@@ -43,6 +47,10 @@ export function getConfig(app: Construct) {
         Version: ensureString(unparsedEnv, 'Version'),
         Environment: ensureString(unparsedEnv, 'Environment'),
         Build: ensureString(unparsedEnv, 'Build'),
+
+        GithubBranch: ensureString(unparsedEnv, 'GithubBranch'),
+        GithubRepo: ensureString(unparsedEnv, 'GithubRepo'),
+        GithubSecretName: ensureString(unparsedEnv, 'GithubSecretName'),
 
         Parameters: {
             TestParameter: ensureString(unparsedEnv['Parameters'], 'TestParameter'),

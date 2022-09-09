@@ -170,7 +170,6 @@ const projCdkAppOptions: ProjCdkAppOptions = { ... }
 | <code><a href="#@randyridgley/awscdk-app-ts.ProjCdkAppOptions.property.lambdaAutoDiscover">lambdaAutoDiscover</a></code> | <code>boolean</code> | Automatically adds an `awscdk.LambdaFunction` for each `.lambda.ts` handler in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | <code><a href="#@randyridgley/awscdk-app-ts.ProjCdkAppOptions.property.lambdaExtensionAutoDiscover">lambdaExtensionAutoDiscover</a></code> | <code>boolean</code> | Automatically adds an `awscdk.LambdaExtension` for each `.lambda-extension.ts` entrypoint in your source tree. If this is disabled, you can manually add an `awscdk.AutoDiscover` component to your project. |
 | <code><a href="#@randyridgley/awscdk-app-ts.ProjCdkAppOptions.property.lambdaOptions">lambdaOptions</a></code> | <code>projen.awscdk.LambdaFunctionCommonOptions</code> | Common options for all AWS Lambda functions. |
-| <code><a href="#@randyridgley/awscdk-app-ts.ProjCdkAppOptions.property.cdkPipelines">cdkPipelines</a></code> | <code>boolean</code> | Enable CDK pipelines. |
 
 ---
 
@@ -2345,19 +2344,6 @@ public readonly lambdaOptions: LambdaFunctionCommonOptions;
 - *Default:* default options
 
 Common options for all AWS Lambda functions.
-
----
-
-##### `cdkPipelines`<sup>Optional</sup> <a name="cdkPipelines" id="@randyridgley/awscdk-app-ts.ProjCdkAppOptions.property.cdkPipelines"></a>
-
-```typescript
-public readonly cdkPipelines: boolean;
-```
-
-- *Type:* boolean
-- *Default:* false
-
-Enable CDK pipelines.
 
 ---
 

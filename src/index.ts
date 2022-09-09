@@ -3,16 +3,7 @@ import { readFileSync } from 'fs';
 import * as path from 'path';
 import { SampleDir } from 'projen';
 import { ApprovalLevel, AwsCdkTypeScriptApp, AwsCdkTypeScriptAppOptions } from 'projen/lib/awscdk';
-import { CdkPipelineAspect } from './aspects/cdk-pipelines';
-
-export interface ProjCdkAppOptions extends AwsCdkTypeScriptAppOptions {
-  /**
-   * Enable CDK pipelines
-   *
-   * @default false
-   */
-  readonly cdkPipelines?: boolean;
-}
+export interface ProjCdkAppOptions extends AwsCdkTypeScriptAppOptions {}
 
 /**
  * Create a Proj CDK Typescript project.
@@ -36,10 +27,6 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
       ...options,
     });
 
-    if (options.cdkPipelines) {
-      new CdkPipelineAspect(this);
-    }
-
     // Remove existing tasks
     this.removeTask('test-update');
     this.removeTask('upgrade');
@@ -52,19 +39,9 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
       sourceDir: path.join(__dirname, '..', 'sample/src'),
     });
 
-    if (options.cdkPipelines) {
-      new SampleDir(this, 'src/pipeline', {
-        sourceDir: path.join(__dirname, '..', 'sample/pipeline'),
-      });
-
-      new SampleDir(this, 'environments', {
-        sourceDir: path.join(__dirname, '..', 'sample/environments/pipeline'),
-      });
-    } else {
-      new SampleDir(this, 'environments', {
-        sourceDir: path.join(__dirname, '..', 'sample/environments/standard'),
-      });
-    }
+    new SampleDir(this, 'environments', {
+      sourceDir: path.join(__dirname, '..', 'sample/environments/pipeline'),
+    });
   }
 
   postSynthesize(): void {

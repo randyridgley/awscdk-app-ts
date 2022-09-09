@@ -1,19 +1,43 @@
 import { App, Aspects } from 'aws-cdk-lib';
 import { AwsSolutionsChecks } from 'cdk-nag';
-import { DefaultStack } from './stacks/default-stack';
-import { BuildConfig, getConfig } from './environment/build-config';
+import path from 'path';
+import * as fs from 'fs'
+import * as yaml from 'js-yaml';
+import { BuildConfig, ensureString } from './environment/build-config';
+import { CdkpipelinesDemoPipelineStack } from './pipeline/cdkpipelines-demo-pipeline-stack';
+
 
 const app = new App();
 
-let buildConfig: BuildConfig = getConfig(app);
+let unparsedEnv: any = yaml.load(fs.readFileSync(path.resolve("./environments/build-account.yaml"), "utf8"));
 
-let defaultStackName = buildConfig.App + "-" + buildConfig.Environment + "-default";
-const defaultStack = new DefaultStack(app, defaultStackName, {
-  env: {
-      region: buildConfig.AWSProfileRegion,
-      account: buildConfig.AWSAccountID
-  },
+let buildConfig: BuildConfig = {
+    AWSAccountID: ensureString(unparsedEnv, 'AWSAccountID'),
+    AWSProfileName: ensureString(unparsedEnv, 'AWSProfileName'),
+    AWSProfileRegion: ensureString(unparsedEnv, 'AWSProfileRegion'),
+
+    App: ensureString(unparsedEnv, 'App'),
+    Version: ensureString(unparsedEnv, 'Version'),
+    Environment: ensureString(unparsedEnv, 'Environment'),
+    Build: ensureString(unparsedEnv, 'Build'),
+
+    GithubBranch: ensureString(unparsedEnv, 'GithubBranch'),
+    GithubRepo: ensureString(unparsedEnv, 'GithubRepo'),
+    GithubSecretName: ensureString(unparsedEnv, 'GithubSecretName'),
+
+    Parameters: {
+        TestParameter: ensureString(unparsedEnv['Parameters'], 'TestParameter'),
+    }
+};
+
+let defaultStackName = buildConfig.App + "-" + buildConfig.Environment;
+const pipelineStack = new CdkpipelinesDemoPipelineStack(app, defaultStackName, {
+    env: {
+        region: buildConfig.AWSProfileRegion,
+        account: buildConfig.AWSAccountID
+    },
 }, buildConfig);
 
-Aspects.of(defaultStack).add(new AwsSolutionsChecks({ verbose: true }));
+Aspects.of(pipelineStack).add(new AwsSolutionsChecks({ verbose: true }));
+
 app.synth();
