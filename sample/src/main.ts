@@ -1,10 +1,11 @@
 import path from 'path';
 import * as fs from 'fs'
+import * as yaml from 'js-yaml';
 import { App, Aspects } from 'aws-cdk-lib';
 import { AwsSolutionsChecks } from 'cdk-nag';
 import { DefaultStack } from './stacks/default-stack';
 import { BuildConfig } from './environment/build-config';
-const yaml = require('js-yaml');
+
 
 const app = new App();
 

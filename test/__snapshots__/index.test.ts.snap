@@ -331,11 +331,12 @@ cdk.out/
       Object {
         "name": "@types/jest",
         "type": "build",
+        "version": "^27.5.0",
       },
       Object {
         "name": "@types/node",
         "type": "build",
-        "version": "^14",
+        "version": "17.0.35",
       },
       Object {
         "name": "@typescript-eslint/eslint-plugin",
@@ -396,16 +397,17 @@ cdk.out/
       Object {
         "name": "eslint",
         "type": "build",
-        "version": "^8",
-      },
-      Object {
-        "name": "jest",
-        "type": "build",
+        "version": "^8.16.0",
       },
       Object {
         "name": "jest-junit",
         "type": "build",
         "version": "^13",
+      },
+      Object {
+        "name": "jest",
+        "type": "build",
+        "version": "^27.5.1",
       },
       Object {
         "name": "js-yaml",
@@ -433,14 +435,17 @@ cdk.out/
       Object {
         "name": "ts-jest",
         "type": "build",
+        "version": "^27.1.4",
       },
       Object {
         "name": "ts-node",
         "type": "build",
+        "version": "^10.8.0",
       },
       Object {
         "name": "typescript",
         "type": "build",
+        "version": "~4.7.2",
       },
       Object {
         "name": "@randyridgley/cdk-constructs",
@@ -465,6 +470,11 @@ cdk.out/
         "name": "constructs",
         "type": "runtime",
         "version": "^10.0.5",
+      },
+      Object {
+        "name": "js-yaml",
+        "type": "runtime",
+        "version": "4.1.0",
       },
     ],
   },
@@ -982,11 +992,12 @@ Parameters:
       "cdk-monitoring-constructs": "1.22.3",
       "cdk-nag": "2.18.2",
       "constructs": "^10.0.5",
+      "js-yaml": "4.1.0",
     },
     "devDependencies": Object {
       "@randyridgley/cdk-constructs": "*",
-      "@types/jest": "*",
-      "@types/node": "^14",
+      "@types/jest": "^27.5.0",
+      "@types/node": "17.0.35",
       "@typescript-eslint/eslint-plugin": "^5",
       "@typescript-eslint/parser": "^5",
       "aws-cdk": "2.1.0",
@@ -995,21 +1006,21 @@ Parameters:
       "cdk-nag": "2.18.2",
       "constructs": "10.1.94",
       "esbuild": "*",
-      "eslint": "^8",
+      "eslint": "^8.16.0",
       "eslint-config-prettier": "^8.5.0",
       "eslint-import-resolver-node": "*",
       "eslint-import-resolver-typescript": "*",
       "eslint-plugin-import": "*",
-      "jest": "*",
+      "jest": "^27.5.1",
       "jest-junit": "^13",
       "js-yaml": "4.1.0",
       "json-schema": "*",
       "npm-check-updates": "^15",
       "prettier": "^2.7.1",
       "projen": "*",
-      "ts-jest": "*",
-      "ts-node": "*",
-      "typescript": "*",
+      "ts-jest": "^27.1.4",
+      "ts-node": "^10.8.0",
+      "typescript": "~4.7.2",
     },
     "jest": Object {
       "clearMocks": true,
@@ -1100,11 +1111,12 @@ export interface Parameters {
 }",
   "src/main.ts": "import path from 'path';
 import * as fs from 'fs'
+import * as yaml from 'js-yaml';
 import { App, Aspects } from 'aws-cdk-lib';
 import { AwsSolutionsChecks } from 'cdk-nag';
 import { DefaultStack } from './stacks/default-stack';
 import { BuildConfig } from './environment/build-config';
-const yaml = require('js-yaml');
+
 
 const app = new App();
 
