@@ -51,13 +51,17 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
       sourceDir: path.join(__dirname, '..', 'sample/src'),
     });
 
-    new SampleDir(this, 'environments', {
-      sourceDir: path.join(__dirname, '..', 'sample/environments'),
-    });
-
     if (options.cdkPipelines) {
       new SampleDir(this, 'src/pipeline', {
         sourceDir: path.join(__dirname, '..', 'sample/pipeline'),
+      });
+
+      new SampleDir(this, 'environments', {
+        sourceDir: path.join(__dirname, '..', 'sample/environments/pipeline'),
+      });
+    } else {
+      new SampleDir(this, 'environments', {
+        sourceDir: path.join(__dirname, '..', 'sample/environments/standard'),
       });
     }
   }

@@ -2,7 +2,7 @@ import { SecretValue, StackProps } from 'aws-cdk-lib';
 import { CodeBuildStep, CodePipeline, CodePipelineSource, ConfirmPermissionsBroadening, ManualApprovalStep, ShellStep } from 'aws-cdk-lib/pipelines';
 import { Construct } from 'constructs';
 import { BuildConfig } from '../environment/build-config';
-import { BaseStack } from './base-stack';
+import { BaseStack } from '../stacks/base-stack';
 import { CdkpipelinesDemoStage } from './cdkpipelines-demo-stage';
 
 

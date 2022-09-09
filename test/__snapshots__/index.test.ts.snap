@@ -1046,7 +1046,12 @@ Parameters:
     },
     "version": "0.0.0",
   },
-  "src/environment/build-config.ts": "export interface BuildConfig {
+  "src/environment/build-config.ts": "import path from 'path';
+import * as fs from 'fs'
+import * as yaml from 'js-yaml';
+import { Construct } from 'constructs';
+
+export interface BuildConfig {
     readonly AWSAccountID : string;
     readonly AWSProfileName : string;
     readonly AWSProfileRegion : string;
@@ -1061,26 +1066,16 @@ Parameters:
 
 export interface Parameters {
     readonly TestParameter?: string;
-}",
-  "src/main.ts": "import path from 'path';
-import * as fs from 'fs'
-import * as yaml from 'js-yaml';
-import { App, Aspects } from 'aws-cdk-lib';
-import { AwsSolutionsChecks } from 'cdk-nag';
-import { DefaultStack } from './stacks/default-stack';
-import { BuildConfig } from './environment/build-config';
+}
 
-
-const app = new App();
-
-function ensureString(object: { [name: string]: any }, propName: string ): string {
+export function ensureString(object: { [name: string]: any }, propName: string ): string {
     if(!object[propName] || object[propName].trim().length === 0)
         throw new Error(propName +\\" does not exist or is empty\\");
 
     return object[propName];
 }
 
-function getConfig() {
+export function getConfig(app: Construct) {
     let env = app.node.tryGetContext('config');
     if (!env)
         throw new Error(\\"Context variable missing on CDK command. Pass in as \`-c config=XXX\`\\");
@@ -1103,9 +1098,15 @@ function getConfig() {
     };
 
     return buildConfig;
-}
+}",
+  "src/main.ts": "import { App, Aspects } from 'aws-cdk-lib';
+import { AwsSolutionsChecks } from 'cdk-nag';
+import { DefaultStack } from './stacks/default-stack';
+import { BuildConfig, getConfig } from './environment/build-config';
 
-let buildConfig: BuildConfig = getConfig();
+const app = new App();
+
+let buildConfig: BuildConfig = getConfig(app);
 
 let defaultStackName = buildConfig.App + \\"-\\" + buildConfig.Environment + \\"-default\\";
 const defaultStack = new DefaultStack(app, defaultStackName, {
@@ -1116,6 +1117,44 @@ const defaultStack = new DefaultStack(app, defaultStackName, {
 }, buildConfig);
 
 Aspects.of(defaultStack).add(new AwsSolutionsChecks({ verbose: true }));
+app.synth();",
+  "src/pipeline.ts": "import { App, Aspects } from 'aws-cdk-lib';
+import { AwsSolutionsChecks } from 'cdk-nag';
+import path from 'path';
+import * as fs from 'fs'
+import * as yaml from 'js-yaml';
+import { BuildConfig, ensureString } from './environment/build-config';
+import { CdkpipelinesDemoPipelineStack } from '../pipeline/cdkpipelines-demo-pipeline-stack';
+
+
+const app = new App();
+
+let unparsedEnv: any = yaml.load(fs.readFileSync(path.resolve(\\"./environments/build-account.yaml\\"), \\"utf8\\"));
+
+let buildConfig: BuildConfig = {
+    AWSAccountID: ensureString(unparsedEnv, 'AWSAccountID'),
+    AWSProfileName: ensureString(unparsedEnv, 'AWSProfileName'),
+    AWSProfileRegion: ensureString(unparsedEnv, 'AWSProfileRegion'),
+
+    App: ensureString(unparsedEnv, 'App'),
+    Version: ensureString(unparsedEnv, 'Version'),
+    Environment: ensureString(unparsedEnv, 'Environment'),
+    Build: ensureString(unparsedEnv, 'Build'),
+
+    Parameters: {
+        TestParameter: ensureString(unparsedEnv['Parameters'], 'TestParameter'),
+    }
+};
+
+let defaultStackName = buildConfig.App + \\"-\\" + buildConfig.Environment;
+const pipelineStack = new CdkpipelinesDemoPipelineStack(app, defaultStackName, {
+    env: {
+        region: buildConfig.AWSProfileRegion,
+        account: buildConfig.AWSAccountID
+    },
+}, buildConfig);
+
+Aspects.of(pipelineStack).add(new AwsSolutionsChecks({ verbose: true }));
 
 app.synth();",
   "src/stacks/base-stack.ts": "import { NestedStack, NestedStackProps, Stack, StackProps, Tags } from 'aws-cdk-lib';
