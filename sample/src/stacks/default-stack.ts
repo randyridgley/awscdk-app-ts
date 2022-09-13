@@ -41,7 +41,7 @@ export class DefaultStack extends BaseStack {
     NagSuppressions.addResourceSuppressions(logBucket, [
       {
         id: 'AwsSolutions-S1',
-        reason: 'This bucket itself is for server access log from other buckets, so does not have server access log enabled',
+        reason: 'This bucket itself is for server access logs from other buckets, so does not have server access log enabled',
       },
     ]);
 

@@ -21,7 +21,9 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
 
       // Required for cross account access to S3
       crossAccountKeys: true,
-
+      // codeBuildDefaults: {
+      //   rolePolicy: ,
+      // },  
       // How it will be built and synthesized
       synth: new ShellStep('Synth', {
         // Where the source can be found
@@ -38,20 +40,19 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
       }),
     });
 
-    pipeline.addWave('BuildWave', {
+    const wave = pipeline.addWave('DeployWave', {      
       post: [
         new CodeBuildStep('BuildSource', {
           commands: ['echo Build and unit tests go here.', 'echo Maybe a docker build and push too.'],
 
         }),
       ],
-    });
-
+    });    
     const preprod = new CdkpipelinesDemoStage(this, 'dev', {
       env: { account: props.env?.account, region: 'us-east-1' },
     });
 
-    pipeline.addStage(preprod, {
+    wave.addStage(preprod, {      
       pre: [
         new ConfirmPermissionsBroadening('PermissionCheck', { stage: preprod }),
       ],
@@ -76,14 +77,14 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
       env: { account: props.env?.account, region: 'us-west-2' },
     });
 
-    pipeline.addStage(prod, {
+    wave.addStage(prod, {
       stackSteps: [{
         stack: prod.service,
         changeSet: [
           new ManualApprovalStep('PromoteToProd', {
             comment: 'Do you want to promote this build to production?',
           }),
-        ],
+        ],        
       }],
     });
   }

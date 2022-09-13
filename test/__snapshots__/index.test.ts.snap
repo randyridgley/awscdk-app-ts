@@ -1180,6 +1180,10 @@ export function getConfig(env: string) {
 
   return buildConfig;
 }",
+  "src/environment/wave-config.ts": "
+export interface WaveConfig {
+    readonly wave:Wave;
+}",
   "src/main.ts": "import * as fs from 'fs';
 import path from 'path';
 import { App } from 'aws-cdk-lib';
@@ -1244,7 +1248,9 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
 
       // Required for cross account access to S3
       crossAccountKeys: true,
-
+      // codeBuildDefaults: {
+      //   rolePolicy: ,
+      // },  
       // How it will be built and synthesized
       synth: new ShellStep('Synth', {
         // Where the source can be found
@@ -1261,20 +1267,19 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
       }),
     });
 
-    pipeline.addWave('BuildWave', {
+    const wave = pipeline.addWave('DeployWave', {      
       post: [
         new CodeBuildStep('BuildSource', {
           commands: ['echo Build and unit tests go here.', 'echo Maybe a docker build and push too.'],
 
         }),
       ],
-    });
-
+    });    
     const preprod = new CdkpipelinesDemoStage(this, 'dev', {
       env: { account: props.env?.account, region: 'us-east-1' },
     });
 
-    pipeline.addStage(preprod, {
+    wave.addStage(preprod, {      
       pre: [
         new ConfirmPermissionsBroadening('PermissionCheck', { stage: preprod }),
       ],
@@ -1299,14 +1304,14 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
       env: { account: props.env?.account, region: 'us-west-2' },
     });
 
-    pipeline.addStage(prod, {
+    wave.addStage(prod, {
       stackSteps: [{
         stack: prod.service,
         changeSet: [
           new ManualApprovalStep('PromoteToProd', {
             comment: 'Do you want to promote this build to production?',
           }),
-        ],
+        ],        
       }],
     });
   }
@@ -1467,7 +1472,7 @@ export class DefaultStack extends BaseStack {
     NagSuppressions.addResourceSuppressions(logBucket, [
       {
         id: 'AwsSolutions-S1',
-        reason: 'This bucket itself is for server access log from other buckets, so does not have server access log enabled',
+        reason: 'This bucket itself is for server access logs from other buckets, so does not have server access log enabled',
       },
     ]);
 
