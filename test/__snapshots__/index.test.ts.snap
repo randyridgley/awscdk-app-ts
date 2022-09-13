@@ -1217,6 +1217,7 @@ new CdkpipelinesDemoPipelineStack(app, defaultStackName, {
     region: buildConfig.AWSProfileRegion,
     account: buildConfig.AWSAccountID,
   },
+  pipelineName: 'TestPipeline'
 }, buildConfig);
 
 app.synth();",
@@ -1228,7 +1229,7 @@ import { CdkpipelinesDemoStage } from './cdkpipelines-demo-stage';
 
 
 export interface CdkpipelinesDemoPipelineStackProps extends StackProps {
-
+  readonly pipelineName: string
 }
 /**
  * The stack that defines the application pipeline
@@ -1239,7 +1240,7 @@ export class CdkpipelinesDemoPipelineStack extends Stack {
 
     const pipeline = new CodePipeline(this, 'Pipeline', {
       // The pipeline name
-      pipelineName: 'ServicePipeline',
+      pipelineName: props.pipelineName,
 
       // Required for cross account access to S3
       crossAccountKeys: true,
@@ -1338,8 +1339,8 @@ export class CdkpipelinesDemoStage extends Stage {
   }
 }",
   "src/stacks/base-stack.ts": "import { Aspects, NestedStack, NestedStackProps, Stack, StackProps, Tags } from 'aws-cdk-lib';
-import { DashboardRenderingPreference, DefaultDashboardFactory, MonitoringFacade } from 'cdk-monitoring-constructs';
-import { AwsSolutionsChecks } from 'cdk-nag';
+import { DefaultDashboardFactory, MonitoringFacade } from 'cdk-monitoring-constructs';
+import { AwsSolutionsChecks, NagSuppressions } from 'cdk-nag';
 import { Construct } from 'constructs';
 import { BuildConfig } from '../environment/build-config';
 
@@ -1365,26 +1366,42 @@ export class BaseStack extends Stack {
     Tags.of(this).add('Stack', this.stackName);
 
     const dashboardFactory = new DefaultDashboardFactory(this, 'DefaultDashboardFactory', {
-        dashboardNamePrefix: props.dashboardName ?? \`\${id}-dashboard\`,
-        createDashboard: true,
-        createAlarmDashboard: true,
-        createSummaryDashboard: true,
-        renderingPreference: DashboardRenderingPreference.INTERACTIVE_AND_BITMAP,
-      }
-    );
-
+      dashboardNamePrefix: props.dashboardName ?? \`\${id}-dashboard\`,
+      createDashboard: true,
+      createAlarmDashboard: true,
+      createSummaryDashboard: true,      
+    });
+    
     this.monitoring = new MonitoringFacade(this, 'MonitoringFacade', {
       alarmFactoryDefaults: {
         alarmNamePrefix: props.alarmNamePrefix ?? \`\${id}-alarms\`,
         actionsEnabled: false,
         datapointsToAlarm: 3,
-      },      
+      },
       metricFactoryDefaults: {
-        namespace: props.metricNamespace,        
+        namespace: props.metricNamespace,
       },
       dashboardFactory,
     });
 
+    NagSuppressions.addResourceSuppressions(
+      this.monitoring,
+      [
+        {
+          id: 'AwsSolutions-L1',
+          reason: 'External library CDK Monitoring Constructs is setting the version of the lambda function.',
+        },
+        {
+          id: 'AwsSolutions-IAM4',
+          reason: 'MonitoringFacade in CDK Monitoring Constructs is using the managed policy service-role/AWSLambdaBasicExecutionRole in its code base to create Lambda functions.'
+        },
+        {
+          id: 'AwsSolutions-IAM5',
+          reason: 'MonitoringFacade in CDK Monitoring Constructs is creating policies with *.'
+        }
+      ],
+      true,
+    );
     Aspects.of(this).add(new AwsSolutionsChecks({ verbose: true }));
   }
 }
@@ -1407,13 +1424,17 @@ export class NestedBaseStack extends NestedStack {
   }
 }
 ",
-  "src/stacks/default-stack.ts": "import { RestApi } from 'aws-cdk-lib/aws-apigateway';
+  "src/stacks/default-stack.ts": "import { SecureBucket } from '@randyridgley/cdk-constructs';
+import { Duration } from 'aws-cdk-lib';
+import { Key } from 'aws-cdk-lib/aws-kms';
+import { BucketEncryption } from 'aws-cdk-lib/aws-s3';
+import { NagSuppressions } from 'cdk-nag';
 import { Construct } from 'constructs';
 import { BuildConfig } from '../environment/build-config';
 import { BaseStack, BaseStackProps } from './base-stack';
 
 export interface DefaultStackProps extends BaseStackProps {
-
+  readonly eventsKey?: Key;
 }
 
 export class DefaultStack extends BaseStack {
@@ -1424,8 +1445,35 @@ export class DefaultStack extends BaseStack {
     this.buildConfig = buildConfig;
     console.log(this.buildConfig.Parameters.TestParameter);
 
-    const restApi = new RestApi(this, 'ApiGateway', { })
-    restApi.root.addMethod('ANY');
+    const kmsKey = props.eventsKey
+    ? props.eventsKey
+    : new Key(this, 'StackKmsKey', {
+      enableKeyRotation: true,
+      alias: \`\${id}-kms-key\`,
+      pendingWindow: Duration.days(7),
+    });
+
+    const logBucket = new SecureBucket(this, 'EventsLogBucket', {
+      lifecycleRules: [
+        {
+          expiration: Duration.days(180),
+        },
+      ],
+      encryptionKey: kmsKey,
+      encryption: BucketEncryption.KMS,
+      bucketKeyEnabled: true,
+    });
+
+    NagSuppressions.addResourceSuppressions(logBucket, [
+      {
+        id: 'AwsSolutions-S1',
+        reason: 'This bucket itself is for server access log from other buckets, so does not have server access log enabled',
+      },
+    ]);
+
+    new SecureBucket(this, 'TestBucketFromPipeline', {
+      serverAccessLogsBucket: logBucket
+    });
   }
 }
 ",
