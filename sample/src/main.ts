@@ -1,7 +1,6 @@
-import { App, Aspects } from 'aws-cdk-lib';
-import { AwsSolutionsChecks } from 'cdk-nag';
+import * as fs from 'fs';
 import path from 'path';
-import * as fs from 'fs'
+import { App } from 'aws-cdk-lib';
 import * as yaml from 'js-yaml';
 import { BuildConfig, ensureString } from './environment/build-config';
 import { CdkpipelinesDemoPipelineStack } from './pipeline/cdkpipelines-demo-pipeline-stack';
@@ -9,35 +8,33 @@ import { CdkpipelinesDemoPipelineStack } from './pipeline/cdkpipelines-demo-pipe
 
 const app = new App();
 
-let unparsedEnv: any = yaml.load(fs.readFileSync(path.resolve("./environments/build-account.yaml"), "utf8"));
+let unparsedEnv: any = yaml.load(fs.readFileSync(path.resolve('./environments/build-account.yaml'), 'utf8'));
 
 let buildConfig: BuildConfig = {
-    AWSAccountID: ensureString(unparsedEnv, 'AWSAccountID'),
-    AWSProfileName: ensureString(unparsedEnv, 'AWSProfileName'),
-    AWSProfileRegion: ensureString(unparsedEnv, 'AWSProfileRegion'),
+  AWSAccountID: ensureString(unparsedEnv, 'AWSAccountID'),
+  AWSProfileName: ensureString(unparsedEnv, 'AWSProfileName'),
+  AWSProfileRegion: ensureString(unparsedEnv, 'AWSProfileRegion'),
 
-    App: ensureString(unparsedEnv, 'App'),
-    Version: ensureString(unparsedEnv, 'Version'),
-    Environment: ensureString(unparsedEnv, 'Environment'),
-    Build: ensureString(unparsedEnv, 'Build'),
+  App: ensureString(unparsedEnv, 'App'),
+  Version: ensureString(unparsedEnv, 'Version'),
+  Environment: ensureString(unparsedEnv, 'Environment'),
+  Build: ensureString(unparsedEnv, 'Build'),
 
-    GithubBranch: ensureString(unparsedEnv, 'GithubBranch'),
-    GithubRepo: ensureString(unparsedEnv, 'GithubRepo'),
-    GithubSecretName: ensureString(unparsedEnv, 'GithubSecretName'),
+  GithubBranch: ensureString(unparsedEnv, 'GithubBranch'),
+  GithubRepo: ensureString(unparsedEnv, 'GithubRepo'),
+  GithubSecretName: ensureString(unparsedEnv, 'GithubSecretName'),
 
-    Parameters: {
-        TestParameter: ensureString(unparsedEnv['Parameters'], 'TestParameter'),
-    }
+  Parameters: {
+    TestParameter: ensureString(unparsedEnv.Parameters, 'TestParameter'),
+  },
 };
 
-let defaultStackName = buildConfig.App + "-" + buildConfig.Environment;
-const pipelineStack = new CdkpipelinesDemoPipelineStack(app, defaultStackName, {
-    env: {
-        region: buildConfig.AWSProfileRegion,
-        account: buildConfig.AWSAccountID
-    },
+let defaultStackName = buildConfig.App + '-' + buildConfig.Environment;
+new CdkpipelinesDemoPipelineStack(app, defaultStackName, {
+  env: {
+    region: buildConfig.AWSProfileRegion,
+    account: buildConfig.AWSAccountID,
+  },
 }, buildConfig);
-
-Aspects.of(pipelineStack).add(new AwsSolutionsChecks({ verbose: true }));
 
 app.synth();

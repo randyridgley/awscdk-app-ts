@@ -7,9 +7,9 @@ Environment: "dev"
 Version: "0.0.0"
 Build: "0"
 
-GithubSecretName: "ApplicationName/Prod/GithubSecret"
+GithubSecretName: "ApplicationName/Dev/GithubSecret"
 GithubRepo: "organization/repo"
 GithubBranch: "main"
 
 Parameters:
-  TestParameter: "TestFooBar"
+  TestParameter: "DevFooBar"

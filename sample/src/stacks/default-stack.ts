@@ -1,10 +1,10 @@
-import { StackProps } from 'aws-cdk-lib';
+import { RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { Construct } from 'constructs';
 import { BuildConfig } from '../environment/build-config';
-import { BaseStack } from './base-stack';
+import { BaseStack, BaseStackProps } from './base-stack';
 
-export interface DefaultStackProps extends StackProps {
-  
+export interface DefaultStackProps extends BaseStackProps {
+
 }
 
 export class DefaultStack extends BaseStack {
@@ -14,5 +14,8 @@ export class DefaultStack extends BaseStack {
     super(scope, id, props, buildConfig);
     this.buildConfig = buildConfig;
     console.log(this.buildConfig.Parameters.TestParameter);
+
+    const restApi = new RestApi(this, 'ApiGateway', { })
+    restApi.root.addMethod('ANY');
   }
 }

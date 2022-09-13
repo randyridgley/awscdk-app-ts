@@ -1,6 +1,6 @@
 AWSAccountID: "XXXXXXXXXXXX"
 AWSProfileName: "default"
-AWSProfileRegion: "us-east-1"
+AWSProfileRegion: "us-west-2"
 
 App: "ProdApplication"
 Environment: "prod"

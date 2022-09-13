@@ -30,7 +30,18 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
     this.removeTask('test-update');
     this.removeTask('upgrade');
 
-    this.addDeps('cdk-nag@2.18.2', 'cdk-monitoring-constructs@1.22.3', '@randyridgley/cdk-constructs', 'js-yaml@4.1.0');
+    this.addDeps(
+      'cdk-nag@2.18.2',
+      'cdk-monitoring-constructs@1.22.3',
+      '@randyridgley/cdk-constructs',
+      'js-yaml@4.1.0',
+      '@aws-cdk/aws-apigatewayv2-alpha@^2.40.0-alpha.0', //needed for cdk-monitoring-constructs
+      '@aws-cdk/aws-appsync-alpha@^2.40.0-alpha.0', //needed for cdk-monitoring-constructs
+      '@aws-cdk/aws-redshift-alpha@^2.40.0-alpha.0', //needed for cdk-monitoring-constructs
+      '@aws-cdk/aws-synthetics-alpha@^2.40.0-alpha.0', //needed for cdk-monitoring-constructs
+      'aws-cdk-lib@2.40.0', //needed for cdk-monitoring-constructs
+      'constructs@10.1.94',
+    ); //needed for cdk-monitoring-constructs
 
     this.addDevDeps(
       '@types/js-yaml',
@@ -57,9 +68,6 @@ export class ProjCDKTypescriptProject extends AwsCdkTypeScriptApp {
   }
 
   postSynthesize(): void {
-    // const out = child_process.execSync(this.runTaskCommand(this.lintFix));
-    // console.log(out.toString('utf-8'));
-
     console.log('Synth complete! See README.md for usage.');
   }
 }

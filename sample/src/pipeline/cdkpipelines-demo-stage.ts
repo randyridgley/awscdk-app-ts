@@ -1,6 +1,5 @@
 
-import { Aspects, CfnOutput, Stage, StageProps } from 'aws-cdk-lib';
-import { AwsSolutionsChecks } from 'cdk-nag';
+import { Stage, StageProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { BuildConfig, getConfig } from '../environment/build-config';
 import { DefaultStack } from '../stacks/default-stack';
@@ -9,22 +8,20 @@ import { DefaultStack } from '../stacks/default-stack';
  * Deployable unit of web service app
  */
 export class CdkpipelinesDemoStage extends Stage {
-  public readonly urlOutput: CfnOutput;
   public readonly service: DefaultStack;
-  
   constructor(scope: Construct, id: string, props?: StageProps) {
     super(scope, id, props);
 
-    let buildConfig: BuildConfig = getConfig(this);
+    let buildConfig: BuildConfig = getConfig(id);
 
-    let defaultStackName = buildConfig.App + "-" + buildConfig.Environment + "-default";
+    let defaultStackName = buildConfig.App + '-' + buildConfig.Environment + '-default';
     const defaultStack = new DefaultStack(this, defaultStackName, {
       env: {
-          region: buildConfig.AWSProfileRegion,
-          account: buildConfig.AWSAccountID
+        region: buildConfig.AWSProfileRegion,
+        account: buildConfig.AWSAccountID,
       },
     }, buildConfig);
-    
-    Aspects.of(defaultStack).add(new AwsSolutionsChecks({ verbose: true }));
+
+    this.service = defaultStack;
   }
 }
